@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+
+  dvwa:
+    image: vulnerables/web-dvwa
+    ports:
+      - "8080:80"
+    container_name: target-web
+
+  ftp-server:
+    image: garethflowers/ftp-server
+    ports:
+      - "21:21"
+    container_name: target-ftp
+    environment:
+      - FTP_USER=admin
+      - FTP_PASS=admin123
+
+  ssh-server:
+    image: linuxserver/openssh-server
+    ports:
+      - "2222:2222"
+    container_name: target-ssh
+    environment:
+      - PASSWORD_ACCESS=true
+      - USER_PASSWORD=password123
+      - USER_NAME=victim
